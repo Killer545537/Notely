@@ -75,7 +75,7 @@ export default function HeroSection() {
                                             asChild
                                             size="lg"
                                             className="rounded-xl px-5 text-base">
-                                            <Link href="#features">
+                                            <Link href="/signin">
                                                 <span className="text-nowrap">Start Noting</span>
                                             </Link>
                                         </Button>

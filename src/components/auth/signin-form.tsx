@@ -11,6 +11,7 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { toast } from 'sonner';
 import { signInUser } from '@/server/users';
+import Link from 'next/link';
 
 const formSchema = z.object({
     email: z.email(),
@@ -93,9 +94,9 @@ export const SigninForm = ({
                         </div>
                         <div className="mt-4 text-center text-sm">
                             Don&apos;t have an account?{' '}
-                            <a href="#" className="underline underline-offset-4">
+                            <Link href="/signup" className="underline underline-offset-4">
                                 Sign up
-                            </a>
+                            </Link>
                         </div>
                     </form>
                 </CardContent>
