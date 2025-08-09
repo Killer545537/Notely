@@ -10,6 +10,7 @@ const requiredVars = [
     'DATABASE_URL',
     'NEXT_PUBLIC_BASE_URL',
     'BETTER_AUTH_SECRET',
+    'RESEND_API_KEY',
 ] as const;
 
 const missingVars = requiredVars.filter((key) => !process.env[key]);

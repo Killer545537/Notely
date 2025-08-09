@@ -27,7 +27,7 @@ export const signUpUser = async (name: string, email: string, password: string) 
             },
         });
 
-        return { success: true, message: 'Signed up successfully!' };
+        return { success: true, message: 'Email verification code sent' };
     } catch (e) {
         const error = e as Error;
         return { success: false, message: error.message || 'Failed to sign up' };

@@ -54,7 +54,7 @@ export const SignupForm = ({
                 <CardHeader>
                     <CardTitle>Create your account</CardTitle>
                     <CardDescription>
-                        Enter your details below to create your Notely account
+                        Enter your details below to create an account
                     </CardDescription>
                 </CardHeader>
                 <CardContent>
