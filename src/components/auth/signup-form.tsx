@@ -12,6 +12,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { toast } from 'sonner';
 import { signUpUser } from '@/server/users';
 import Link from 'next/link';
+import { authClient } from '@/lib/auth-client';
 
 const formSchema = z.object({
     name: z.string()
@@ -21,6 +22,12 @@ const formSchema = z.object({
     password: z.string().min(8, { error: 'Password should be at least 8 characters long' }),
 });
 
+const signInGoogle = async () => {
+    await authClient.signIn.social({
+        provider: 'google',
+        callbackURL: '/dashboard',
+    })
+}
 
 export const SignupForm = ({
                                className,
@@ -97,7 +104,7 @@ export const SignupForm = ({
                                 <Button type="submit" className="w-full" disabled={form.formState.isSubmitting}>
                                     {form.formState.isSubmitting ? 'Signing up...' : 'Sign up'}
                                 </Button>
-                                <Button variant="outline" className="w-full" type="button">
+                                <Button variant="outline" className="w-full" type="button" onClick={signInGoogle}>
                                     Sign up with Google
                                 </Button>
                             </div>

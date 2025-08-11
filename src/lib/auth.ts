@@ -25,6 +25,12 @@ export const auth = betterAuth({
         },
         enabled: true,
     },
+    socialProviders: {
+        google: {
+            clientId: CONFIG.GOOGLE_CLIENT_ID,
+            clientSecret: CONFIG.GOOGLE_CLIENT_SECRET,
+        }
+    },
     emailVerification: {
         sendVerificationEmail: async ({ user, url }) => {
             await resend.emails.send({

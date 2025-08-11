@@ -10,6 +10,8 @@ const requiredVars = [
     'DATABASE_URL',
     'BETTER_AUTH_SECRET',
     'RESEND_API_KEY',
+    'GOOGLE_CLIENT_ID',
+    'GOOGLE_CLIENT_SECRET',
 ] as const;
 
 const missingVars = requiredVars.filter((key) => !process.env[key]);

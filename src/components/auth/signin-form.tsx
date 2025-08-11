@@ -13,11 +13,19 @@ import { toast } from 'sonner';
 import { signInUser } from '@/server/users';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
+import { authClient } from '@/lib/auth-client';
 
 const formSchema = z.object({
     email: z.email(),
     password: z.string().min(8, { error: 'Password should be at least 8 characters long' }),
 });
+
+const signInGoogle = async () => {
+    await authClient.signIn.social({
+        provider: 'google',
+        callbackURL: '/dashboard',
+    })
+}
 
 export const SigninForm = ({
                                className,
@@ -90,7 +98,7 @@ export const SigninForm = ({
                                 <Button type="submit" className="w-full" disabled={form.formState.isSubmitting}>
                                     {form.formState.isSubmitting ? 'Logging in...' : 'Login'}
                                 </Button>
-                                <Button variant="outline" className="w-full" type="button">
+                                <Button variant="outline" className="w-full" type="button" onClick={signInGoogle}>
                                     Login with Google
                                 </Button>
                             </div>
