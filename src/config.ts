@@ -8,7 +8,6 @@ if (process.env.NODE_ENV !== 'production') {
 
 const requiredVars = [
     'DATABASE_URL',
-    'NEXT_PUBLIC_BASE_URL',
     'BETTER_AUTH_SECRET',
     'RESEND_API_KEY',
 ] as const;
@@ -28,3 +27,7 @@ type ConfigType = {
 export const CONFIG = Object.fromEntries(
     requiredVars.map((key) => [key, process.env[key] as string]),
 ) as ConfigType;
+
+export const CLIENT_CONFIG = {
+    NEXT_PUBLIC_BASE_URL: process.env.NEXT_PUBLIC_BASE_URL as string,
+}

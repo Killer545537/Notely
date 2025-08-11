@@ -12,6 +12,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { toast } from 'sonner';
 import { signInUser } from '@/server/users';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 
 const formSchema = z.object({
     email: z.email(),
@@ -22,6 +23,7 @@ export const SigninForm = ({
                                className,
                                ...props
                            }: React.ComponentProps<'div'>) => {
+    const router = useRouter();
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
         defaultValues: {
@@ -35,6 +37,7 @@ export const SigninForm = ({
             const result = await signInUser(values.email, values.password);
             if (result.success) {
                 toast.success(result.message);
+                router.push('/dashboard');
             } else {
                 toast.error(result.message);
             }
@@ -71,12 +74,12 @@ export const SigninForm = ({
                             <div className="grid gap-3">
                                 <div className="flex items-center">
                                     <Label htmlFor="password">Password</Label>
-                                    <a
-                                        href="#"
+                                    <Link
+                                        href="/forgot-password"
                                         className="ml-auto inline-block text-sm underline-offset-4 hover:underline"
                                     >
                                         Forgot your password?
-                                    </a>
+                                    </Link>
                                 </div>
                                 <Input id="password" type="password" required {...form.register('password')} />
                                 {form.formState.errors.password && (

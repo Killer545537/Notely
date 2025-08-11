@@ -4,26 +4,34 @@ import { db } from '@/db/db';
 import { schema } from '@/db/schema/better-auth';
 import { nextCookies } from 'better-auth/next-js';
 import { Resend } from 'resend';
-import { CONFIG } from '@/config';
+import { CLIENT_CONFIG, CONFIG } from '@/config';
 import EmailVerification from '@/components/emails/verification-mail';
+import PasswordReset from '@/components/emails/password-reset-mail';
 
 const resend = new Resend(CONFIG.RESEND_API_KEY);
 
 export const auth = betterAuth({
-    baseURL: CONFIG.NEXT_PUBLIC_BASE_URL,
+    baseURL: CLIENT_CONFIG.NEXT_PUBLIC_BASE_URL,
     basePath: '/api/auth',
     emailAndPassword: {
         requireEmailVerification: true,
+        sendResetPassword: async ({user, url}) => {
+            await resend.emails.send({
+                from: 'Notely <onboarding@resend.dev>',
+                to: [user.email],
+                subject: 'Reset your password',
+                react: PasswordReset({name: user.name, resetUrl: url})
+            })
+        },
         enabled: true,
     },
     emailVerification: {
         sendVerificationEmail: async ({ user, url }) => {
-            console.log(`${url}`);
             await resend.emails.send({
                 from: 'Notely <onboarding@resend.dev>',
                 to: [user.email],
                 subject: 'Verify your email address',
-                react: EmailVerification({ name: user.name, verificationUrl: url }),
+                react: EmailVerification({ name: user.name, verificationUrl: url })
             });
         },
         sendOnSignUp: true,
