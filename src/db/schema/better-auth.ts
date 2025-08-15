@@ -59,5 +59,3 @@ export const verification = pgTable('verification', {
         () => /* @__PURE__ */ new Date(),
     ),
 });
-
-export const schema = { user, account, session, verification };

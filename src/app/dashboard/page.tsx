@@ -1,10 +1,17 @@
-import { Logout } from '@/components/dashboard/logout';
+import PageWrapper from '@/components/dashboard/page-wrapper';
+import { getNotebooks } from '@/server/notebooks';
+import { CreateNotebookButton } from '@/components/notebook/create-notebook-button';
 
-const Dashboard = () => (
-    <div>
-        <h1>Dashboard</h1>
-        <Logout/>
-    </div>
-);
+const Dashboard = async () => {
+    const notebooks = await getNotebooks();
+
+    return (
+        <PageWrapper breadcrumbs={[{ label: 'Dashboard', href: '/dashboard' }]}>
+            <CreateNotebookButton/>
+            {notebooks.success && notebooks?.notebooks?.map((notebook) => <div key={notebook.id}>{notebook.name}</div>)}
+            {notebooks.success && notebooks?.notebooks?.length === 0 && <div>No notebooks found</div>}
+        </PageWrapper>
+    );
+};
 
 export default Dashboard;

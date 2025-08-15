@@ -1,7 +1,7 @@
 import { drizzle } from 'drizzle-orm/neon-http';
 import { neon } from '@neondatabase/serverless';
 import { CONFIG } from '@/config';
-import { schema } from '@/db/schema/better-auth';
+import { schema } from '@/db/schema';
 
 
 const sql = neon(CONFIG.DATABASE_URL);

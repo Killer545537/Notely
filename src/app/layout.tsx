@@ -3,6 +3,7 @@ import './globals.css';
 import React from 'react';
 import { ThemeProvider } from '@/components/theme-provider';
 import { Toaster } from 'sonner';
+import { NuqsAdapter } from 'nuqs/adapters/next/app';
 
 export const metadata: Metadata = {
     title: 'Create Next App',
@@ -10,23 +11,20 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({
-                                       children,
-                                   }: Readonly<{
+    children,
+}: Readonly<{
     children: React.ReactNode;
 }>) {
     return (
-        <html lang="en" suppressHydrationWarning>
-        <body className={'antialiased'}>
-        <ThemeProvider
-            attribute="class"
-            defaultTheme="system"
-            enableSystem
-            disableTransitionOnChange
-        >
-            <Toaster/>
-            {children}
-        </ThemeProvider>
-        </body>
+        <html lang='en' suppressHydrationWarning>
+            <body className={'antialiased'}>
+                <NuqsAdapter>
+                    <ThemeProvider attribute='class' defaultTheme='system' enableSystem disableTransitionOnChange>
+                        <Toaster />
+                        {children}
+                    </ThemeProvider>
+                </NuqsAdapter>
+            </body>
         </html>
     );
 }

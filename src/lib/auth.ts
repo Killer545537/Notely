@@ -1,7 +1,7 @@
 import { betterAuth } from 'better-auth';
 import { drizzleAdapter } from 'better-auth/adapters/drizzle';
 import { db } from '@/db/db';
-import { schema } from '@/db/schema/better-auth';
+import { schema } from '@/db/schema';
 import { nextCookies } from 'better-auth/next-js';
 import { Resend } from 'resend';
 import { CLIENT_CONFIG, CONFIG } from '@/config';
