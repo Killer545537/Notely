@@ -43,7 +43,12 @@ export const getNotebooks = async () => {
 
 export const getNotebookById = async (id: string) => {
     try {
-        const notebook = await db.select().from(notebooks).where(eq(notebooks.id, id));
+        const notebook = await db.query.notebooks.findFirst({
+            where: eq(notebooks.id, id),
+            with: {
+                notes: true,
+            }
+        });
         return { success: true, notebook };
     } catch {
         return { success: false, message: 'Failed to get notebook' };

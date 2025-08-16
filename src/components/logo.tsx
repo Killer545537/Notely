@@ -1,9 +1,5 @@
-import { cn } from '@/lib/utils'
+import { cn } from '@/lib/utils';
 
-export const Logo = ({ className }: { className?: string }) => {
-    return (
-        <span className={cn('font-bold text-xl text-black dark:text-white', className)}>
-            Notely
-        </span>
-    );
-}
+export const Logo = ({ className }: { className?: string }) => (
+    <span className={cn('text-xl font-bold text-black dark:text-white', className)}>Notely</span>
+);

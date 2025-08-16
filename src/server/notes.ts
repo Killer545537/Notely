@@ -27,7 +27,7 @@ export const getNoteById = async (id: string) => {
     }
 };
 
-export const updateNote = async (id: string, values: InsertNote) => {
+export const updateNote = async (id: string, values: Partial<InsertNote>) => {
     try {
         await db.update(notes).set(values).where(eq(notes.id, id));
         return { success: true, message: 'Note updated successfully' };

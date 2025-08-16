@@ -4,9 +4,8 @@ import { SearchForm } from '@/components/search-form';
 
 import { Sidebar, SidebarContent, SidebarHeader, SidebarRail } from '@/components/ui/sidebar';
 import { getNotebooks } from '@/server/notebooks';
-import Image from 'next/image';
 import { SidebarData } from '@/components/ui/sidebar-data';
-import Link from 'next/link';
+import { Logo } from '@/components/logo';
 
 export const AppSidebar = async ({ ...props }: React.ComponentProps<typeof Sidebar>) => {
     const notebooks = await getNotebooks();
@@ -20,7 +19,7 @@ export const AppSidebar = async ({ ...props }: React.ComponentProps<typeof Sideb
                 url: `/dashboard/${notebook.id}`,
                 items: notebook.notes.map((note) => ({
                     title: note.title,
-                    url: `/dashboard/note/${note.id}`,
+                    url: `/dashboard/notebook/${notebook.id}/note/${note.id}`,
                 })),
             })) ?? []),
         ],
@@ -29,10 +28,7 @@ export const AppSidebar = async ({ ...props }: React.ComponentProps<typeof Sideb
     return (
         <Sidebar {...props}>
             <SidebarHeader>
-                <Link href='/dashboard' className='flex items-center gap-2 pl-2'>
-                    <Image src='/noteforge-logo.png' alt='Logo' width={32} height={32} />
-                    <h2>NoteForge</h2>
-                </Link>
+                <Logo/>
 
                 <React.Suspense>
                     <SearchForm />
